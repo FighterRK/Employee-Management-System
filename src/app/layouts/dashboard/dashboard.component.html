@@ -1,0 +1,386 @@
+<div class="navbar">
+  <div class="logo-content">
+    <div class="logo">
+      <div class="logo-name">Dash Board</div>
+    </div>
+  </div>
+  <ul class="navlist">
+    <li>
+      <a href="javascript:void(0)">
+        <i class="bx bx-grid-alt"></i>
+        <span class="link-name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+
+  
+
+    <li>
+      <a href="javascript:void(0)">
+        <i class="bx bx-message"></i>
+        <span class="link-name">Message</span>
+      </a>
+      <span class="tooltip">Messages</span>
+    </li>
+
+
+
+    <li (click)="addEditEmpForm()">
+      <a href="javascript:void(0)">
+        <i class="bx bx-user-plus"></i>
+        <span class="link-name">Add Employee</span>
+      </a>
+      <span class="tooltip">Add a new employee</span>
+    </li>
+
+    <li id="logout" (click)="logout()">
+      <a href="#">
+        <i class="bx bx-log-out"></i>
+        <span class="link-name">Logout</span>
+      </a>
+      <span class="tooltip">Logout</span>
+    </li>
+  </ul>
+</div>
+<!-- Content Part -->
+
+<div class="container">
+  
+  <div class="welcome">
+    <div class="welcome-bg">
+      
+    </div>
+    
+    <div class="title">
+      <div class="title-text">Welcome Back</div>
+    </div>
+  </div>
+
+  <div class="bar-bg">
+    <div class="bar-chart-main">
+      <div class="cardset">
+        <div class="set1">
+          <div class="pack-1">
+            <div id="one" class="card1">
+              <i class="bx bx-home-smile"></i>
+              <div class="txt">
+                <span>{{ employeeZ.length }}</span>
+              </div>
+              <div class="info-card">
+                <span>Total Number Of <br />
+                  Employees</span>
+              </div>
+            </div>
+            <div id="one" class="card1">
+              <i class='bx bx-run common'></i>
+              <div class="txt">
+                <span>{{ activeEmp }}</span>
+              </div>
+              <div class="info-card">
+                <span>Total Number Of <br />
+                  Active Employees</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-2">
+            <div id="one" class="card1">
+              <i class='bx bx-user-minus common'></i>
+              <div class="txt">
+                <span>{{ inactiveEmp }}</span>
+              </div>
+              <div class="info-card">
+                <span>Total Number Of <br />
+                  Inactive Employees</span>
+              </div>
+            </div>
+            <div id="one" class="card1">
+              <i class='bx bx-time common'></i>
+              <div class="txt">
+                <span>{{ workinHour }}</span>
+
+              </div>
+              <div class="info-card">
+                <span>Total Working Hour<br />
+                  per day</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="bar-chart">
+        <div id="d3"></div>
+        <div class="info">
+          <div class="info-dot">
+            <span class="dot1"></span>
+            <p>More than 5 days</p>
+          </div>
+          <div class="info-dot">
+            <span class="dot2"></span>
+            <p>Below 5 days</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="donut-main">
+    <div class="donut-chart">
+      <div id="chart"></div>
+    </div>
+    <div class="donutchart-info">
+      <div class="donut-table">
+        <div class="table-header">
+          <h1>Employee Activity List</h1>
+        </div>
+        <div class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+              <tr>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of empActandInact">
+                <td>{{e.id}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.status}}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gauge-main">
+    <div class="gauge-chart">
+      <div class="g-title">
+        Total Productive Hour
+      </div>
+      <div id="gauge"></div>
+      <div class="g-info">
+        <div class="a">
+          <span>Total Working Hour <span class="a-sub">{{workinHour}}</span></span>
+        </div>
+        <div class="b">
+          <span>Number Of Active Users <span class="a-sub">{{activeEmp}}</span> </span>
+        </div>
+        <div class="c">
+             <span>Total Productive Hour <span class="a-sub">{{produtiveHrs}}</span>  </span>
+        </div>
+        
+        
+     
+      </div>
+    </div>
+    <div class="emp-bar">
+      <div class="title"> <span>Employee Headcount</span></div>
+     
+      <div class="male">
+        <div class="icon">
+          <i class='bx bx-male'></i>
+        </div>
+        <span>Male</span>
+        <div class="count">
+          {{maleEmp}}
+        </div>
+        
+      </div>
+      <div class="female">
+        <div class="icon">
+          <i class='bx bx-female' ></i>
+
+        </div>
+        <span>Female</span>
+        <div class="count">
+          {{femaleEmp}}
+        </div>
+     
+      </div>
+
+    </div>
+
+    
+  </div>
+
+  <div class="table" id="table">
+    <div class="table-title">Employee Summary</div>
+    <mat-form-field class="form">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" id="search" placeholder="Search ..." #input />
+    </mat-form-field>
+    <!-- <button mat-raised-button (click)="addEditEmpForm()">
+        Add a Employee
+      </button> -->
+
+    <table id="mat-table" mat-table [dataSource]="dataSource" matSort>
+      <!-- Position Column -->
+
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
+        <td mat-cell *matCellDef="let element">
+          <button id="btn-hide" (click)="view(element.id)">
+            {{ element.name }}
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef>DOB</th>
+        <td mat-cell *matCellDef="let element">{{ element.dob | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef>Gender</th>
+        <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="qualification">
+        <th mat-header-cell *matHeaderCellDef>Qualification</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qualification }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mobileNumber">
+        <th mat-header-cell *matHeaderCellDef>Contact Number</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.mobileNumber }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>Position</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="package">
+        <th mat-header-cell *matHeaderCellDef>Package</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.package | currency : "INR" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>Username</th>
+        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="password">
+        <th mat-header-cell *matHeaderCellDef>Password</th>
+        <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Current Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="leaves">
+        <th mat-header-cell *matHeaderCellDef>Leave Details</th>
+        <td mat-cell *matCellDef="let element">{{ element.leaves }}</td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef> Profile Picture </th>
+            <td mat-cell *matCellDef="let element"> <img [src]="element.image" /> </td>
+          </ng-container> -->
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="editform(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteEmployee(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary" (click)="view(element.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+        <router-outlet></router-outlet>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableTitle"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableTitle"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+
+
+  <!-- <div id="donut"></div> -->
+
+  <!-- 
+<div class="leave-application-list">
+  <div *ngFor="let application of notifications">
+    <div class="leave-application">
+      <div class="leave-application-header">
+        <span class="leave-application-date">{{ application.fullName }}</span>
+        <span class="leave-application-status">{{ application.userId }}</span>
+        <span class="leave-application-status">{{ application.password }}</span>
+        <span class="leave-application-status">{{ application.mobileNo }}</span>
+      </div>
+      <div class="leave-application-body">
+        <div class="leave-application-subject">{{ application.startDate | date }}</div>
+        <div class="leave-application-message">{{ application.endDate  | date}}</div>
+        <div class="leave-application-subject">{{ application.days }}</div>
+        <div class="leave-application-message">{{ application.reason}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<button mat-icon-button [matBadge]="notificationCount" matBadgeColor="warn" (click)="showLeaveDetails()">
+  <mat-icon>mail</mat-icon>
+</button> -->
+
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</div>
+
+<footer>
+ 
+  <div class="footer">
+    
+  </div>
+</footer>

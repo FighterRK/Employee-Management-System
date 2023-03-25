@@ -1,0 +1,42 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        
+      </div>
+      <mat-card-title>{{data.name }}
+        <span>{{data.lastName}}</span>
+      </mat-card-title>
+      <mat-card-subtitle>{{data.position}}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+
+        <p><b>First Name :</b> {{data.name}}</p>
+        <p><b>Last Name :</b> {{data.lastName}}</p>
+        <p><b>Email Id :</b> {{data.email}}</p>
+        <p><b>Date Of Birth :</b> {{data.dob | date}}</p>
+        <p><b>Gender :</b> {{data.gender}}</p>
+        <p><b>Education :</b> {{data.qualification}}</p>
+        <p><b>Address :</b> {{data.address}}</p>
+        <p><b>Mobile Number :</b> {{data.mobileNumber}}</p>
+        <p><b>Position :</b> {{data.position}}</p>
+        <p><b>Salary Package :</b> {{data.package | currency:'INR'}}</p>
+        <p><b>User ID :</b> {{data.username}}</p>
+        <p><b>Password :</b> {{data.password}}</p>
+
+
+
+         
+          
+          
+    
+       
+     
+       
+      
+    </mat-card-content>
+    <mat-card-actions>
+      
+    </mat-card-actions>
+  </mat-card>
+  
