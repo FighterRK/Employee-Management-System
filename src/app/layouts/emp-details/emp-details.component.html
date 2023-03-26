@@ -7,17 +7,19 @@
         <li><button (click)=" leaveApplication()">Leave Application</button></li> -->
 
         <li class="btn" (click)="editEmployeedetails(test1)">
-            <img class="svg" src="../../../assets/images/edit.svg" >
+            <!-- //<img class="svg" src="../../../assets/images/edit.svg" > -->
+            <i class='bx bx-edit svg '></i>
             <p class="li-title">Edit Profile</p>
+           
         </li>
         
         <li class="btn" id="leave" (click)=" leaveApplication()">
-            <img class="svg" src="../../../assets/images/leave.svg" >
+            <i class='bx bx-calendar-minus svg'></i>
             <p class="li-title">Leave Application</p>
         </li>
         
         <li class="btn" (click)="logout()">
-            <img class="svg" src="../../../assets/images/logout.svg" >
+            <i class='bx bx-log-out svg' ></i>
             <p class="li-title">Logout</p>
         </li>
        
@@ -33,9 +35,17 @@
 
     <div class="section">
     <div class="title">
+        <div class="bg-title">
 
         <h1> <span>Welcome Back</span>  <br> <b>{{test1?.name}} {{test1?.lastName}}</b></h1>
     </div>
+    </div>
+
+    <div class="main">
+
+ 
+
+<div class="main-content">
     <div class="card">
         <img class="profile" src="../../../assets/images/person.jpg" alt="">
         <div class="text">
@@ -101,6 +111,8 @@
            
           </mat-tab-group>
     </div>
+</div>
+</div>
 
 </div>
 

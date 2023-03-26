@@ -185,7 +185,7 @@ export class DashboardComponent implements OnInit {
      .attr('class', 'background')
      .attr('d', bgArc as any)
      .attr('transform', 'translate(150, 100)')
-     .style('fill', 'yellow')
+     .style('fill', '#36A571')
      
      
      // Draw the gauge arc based on the total productive hours
@@ -194,7 +194,7 @@ export class DashboardComponent implements OnInit {
      .attr('class', 'arc')
      .attr('d', arc as any)
      .attr('transform', 'translate(150, 100)')
-     .style('fill', 'blue');
+     .style('fill', '#373c9e');
      
      // Add the text label for the total productive hours
      svg.append('text')
@@ -315,7 +315,7 @@ export class DashboardComponent implements OnInit {
           if (d.leaves >= 4) {
             return "#FF0800";
           } else {
-            return "#00BFFF";
+            return "#373c9e";
           }
         })
         .transition()
@@ -361,7 +361,8 @@ export class DashboardComponent implements OnInit {
 
     const color = d3.scaleOrdinal()
       .domain(this.employeeZ.map(d => d.status))
-      .range(d3.schemeCategory10);
+      //.range(d3.schemeCategory10);
+      .range(['#ED5F00' , '#FFCE00'])
 
     const arcs = svg.selectAll("arc")
       .data(pie(this.employeeZ))
